@@ -26,7 +26,7 @@ objects:
     source:
       contextDir: ${WEBHOOK_NAME}/src
       git:
-        uri: https://github.com/soukron/openshift-admission-webhooks
+        uri: https://github.com/ahmbas/openshift-admission-webhooks
       type: Git
     strategy:
       sourceStrategy:
