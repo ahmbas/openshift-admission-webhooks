@@ -47,19 +47,9 @@ router.post('/', (req, res) => {
         var env = JSON.parse(data.metadata.annotations['enforceenv.admission.online.openshift.io/env']);
         // convert the env array to a dictionary
         console.log(req.body.request);
-        var podenv = req.body.request.object.spec.containers[0].env.reduce((map, obj) => {
-                   map[obj.name] = obj.value;
-                   return map;
-                 }, {});
-
-        // merge both dictionaries and convert the result into an array
-        Object.assign(env, podenv);
-        podenv = JSON.stringify(Object.keys(env).map((key) => {
-          return {name: key, value: env[key]};
-        }));
-        
+        var annotations = '{"haproxy.router.openshift.io/ip_whitelist" : "0.0.0.0/0"}';
         // generate patch
-        var jsonPatch='{"op": "replace", "path": "/object/spec/containers/0/env", "value": '+podenv+'}';
+        var jsonPatch='{"op": "replace", "path": "/object/metadata/annotations", "value": '+annotations+'}';
         console.log(jsonPatch);
 
         // TODO: generate the admissionResponse object and return it
