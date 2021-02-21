@@ -59,6 +59,7 @@ router.post('/', (req, res) => {
           response: {
             uid: req.body.request.uid,
             allowed: true,
+            patchType: "JSONPatch",
             patch: base64.encode(jsonPatch)
           }
         };
