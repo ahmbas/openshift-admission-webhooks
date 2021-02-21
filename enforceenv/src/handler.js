@@ -60,7 +60,7 @@ router.post('/', (req, res) => {
             uid: req.body.request.uid,
             allowed: true,
             patchType: "JSONPatch",
-            patch: base64.encode(jsonPatch)
+            patch: [{op: "add", path:"/object/metadata/annotations/haproxy.router.openshift.io/ip_whitelist", value: "0.0.0.0/0"}]
           }
         };
         console.log(admissionResponse);
