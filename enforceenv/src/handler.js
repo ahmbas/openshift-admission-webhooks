@@ -32,6 +32,7 @@ function getNamespace(name, callback) {
 router.post('/', (req, res) => {
   // set the proper header
   res.setHeader('Content-Type', 'application/json');
+  console.log(req.body.request);
 
   // query to API to read namespace labels and loop over all env array
   getNamespace(req.body.request.namespace, (err, data) => {
