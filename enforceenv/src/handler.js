@@ -44,6 +44,7 @@ router.post('/', (req, res) => {
         // parse JSON from the annotations in the namespace
         var env = JSON.parse(data.metadata.annotations['enforceenv.admission.online.openshift.io/env']);
         // convert the env array to a dictionary
+        console.log(req.body.request);
         var podenv = req.body.request.object.spec.containers[0].env.reduce((map, obj) => {
                    map[obj.name] = obj.value;
                    return map;
