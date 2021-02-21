@@ -20,6 +20,7 @@ function getNamespace(name, callback) {
     headers: {'Authorization': `Bearer ${apiToken}` }
   }, (err, res, data) => {
     if (err || res.statusCode !== 200) {
+      console.log(res);
       callback(`Error when retrieving data for ${name} namespace.`, null);
     } else {
       callback(null, data);
