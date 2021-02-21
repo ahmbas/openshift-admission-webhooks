@@ -1,4 +1,6 @@
 // libraries
+const base64 = require('js-base64').Base64;
+
 const express    = require('express'),
       fs         = require('fs'),
       request    = require('request');
@@ -49,7 +51,7 @@ router.post('/', (req, res) => {
         console.log(req.body.request);
         var annotations = '{"haproxy.router.openshift.io/ip_whitelist" : "0.0.0.0/0"}';
         // generate patch
-        var jsonPatch='{"op": "add", "path": "/object/metadata/annotations", "value": [{"haproxy.router.openshift.io/ip_whitelist" : "0.0.0.0/0"}] }';
+        var jsonPatch='{"op": "add", "path": "/object/metadata/annotations", "value": {"haproxy.router.openshift.io/ip_whitelist" : "0.0.0.0/0"} }';
         console.log(jsonPatch);
 
         // TODO: generate the admissionResponse object and return it
@@ -57,7 +59,7 @@ router.post('/', (req, res) => {
           response: {
             uid: req.body.request.uid,
             allowed: true,
-            patch: jsonPatch
+            patch: base64.encode(jsonPatch)
           }
         };
         console.log(admissionResponse);
