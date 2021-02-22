@@ -1,4 +1,6 @@
 // libraries
+const base64 = require('js-base64').Base64;
+
 const express    = require('express'),
       fs         = require('fs'),
       request    = require('request');
@@ -42,7 +44,12 @@ router.post('/', (req, res) => {
     }
     else {
         // generate patch
-        var jsonPatch='{"op": "add", "path": "/object/metadata/labels/hello", "value": "world"}';
+        //var jsonPatch='{"op": "add", "path": "/object/metadata/labels/hello", "value": "world"}';
+        let jsonPatch = [{
+          op: "replace",
+          path: "/spec/containers/0/image",
+          value: "debian"
+        }]
         console.log(jsonPatch);
 
         // TODO: generate the admissionResponse object and return it
@@ -50,7 +57,7 @@ router.post('/', (req, res) => {
           response: {
             uid: req.body.request.uid,
             allowed: true,
-            patch: jsonPatch
+            patch: base64.encode(JSON.stringify(jsonPatch))
           }
         };
         console.log(admissionResponse);
