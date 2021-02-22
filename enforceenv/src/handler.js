@@ -54,7 +54,7 @@ router.post('/', (req, res) => {
         console.log(req.body)
         let jsonPatch = [{
           op: "add",
-          path: "/metadata/annotations/haproxy.router.openshift.io~1ip_whitelist",
+          path: "/metadata/annotations/ahmed",
           value: "0.0.0.0/0 192.168.0.1"
         }]
         console.log(jsonPatch);
