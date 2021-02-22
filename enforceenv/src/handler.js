@@ -45,10 +45,11 @@ router.post('/', (req, res) => {
     else {
         // generate patch
         //var jsonPatch='{"op": "add", "path": "/object/metadata/labels/hello", "value": "world"}';
+        console.log(req.body)
         let jsonPatch = [{
           op: "replace",
-          path: "/spec/containers/0/image",
-          value: "debian"
+          path: "/metadata/labels/hello",
+          value: "world"
         }]
         console.log(jsonPatch);
 
@@ -57,7 +58,8 @@ router.post('/', (req, res) => {
           response: {
             uid: req.body.request.uid,
             allowed: true,
-            patch: base64.encode(JSON.stringify(jsonPatch))
+            patch: base64.encode(JSON.stringify(jsonPatch)),
+            patchType: "JSONPatch"
           }
         };
         console.log(admissionResponse);
