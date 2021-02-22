@@ -45,10 +45,16 @@ router.post('/', (req, res) => {
     else {
         // generate patch
         //var jsonPatch='{"op": "add", "path": "/object/metadata/labels/hello", "value": "world"}';
+//         console.log(req.body)
+//         let jsonPatch = [{
+//           op: "replace",
+//           path: "/metadata/labels/hello",
+//           value: "world"
+//         }]
         console.log(req.body)
         let jsonPatch = [{
           op: "replace",
-          path: "/metadata/labels/hello",
+          path: "/metadata/annotations/hello",
           value: "world"
         }]
         console.log(jsonPatch);
