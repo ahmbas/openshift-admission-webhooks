@@ -29,7 +29,7 @@ objects:
       apiVersions:
       - "*"
       resources:
-      - routes
+      - pods
     clientConfig:
       service:
         name: ${WEBHOOK_NAME}
